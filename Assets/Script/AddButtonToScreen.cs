@@ -1,37 +1,25 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.XR.ARFoundation;
-using System.Collections.Generic;
 
 public class AddButtonToScreen : MonoBehaviour
 {
     public GameObject buttonPrefab;
-    public ARRaycastManager raycastManager;
-    public Camera arCamera;
+    public GameObject canvas; // The Canvas to which the button will be added
 
-    private List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
-    private GameObject instantiatedButton;
-
-    void Update()
+    void Start()
     {
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-        {
-            Touch touch = Input.GetTouch(0);
+        // Instantiate the button as a child of the Canvas
+        GameObject instantiatedButton = Instantiate(buttonPrefab, canvas.transform);
 
-            if (raycastManager.Raycast(touch.position, s_Hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon))
-            {
-                Pose hitPose = s_Hits[0].pose;
+        // Move the button to the top of the screen
+        RectTransform rectTransform = instantiatedButton.GetComponent<RectTransform>();
+        rectTransform.anchorMin = new Vector2(0.5f, 1);
+        rectTransform.anchorMax = new Vector2(0.5f, 1);
+        rectTransform.anchoredPosition = new Vector2(0, -150); // Move button down by 150 pixels
 
-                Vector3 screenPosition = new Vector3(Screen.width / 2f, Screen.height, 0f);
-                Vector3 worldPosition = arCamera.ScreenToWorldPoint(screenPosition);
-
-                instantiatedButton = Instantiate(buttonPrefab, worldPosition, hitPose.rotation);
-                instantiatedButton.transform.SetParent(transform);
-
-                Button buttonComponent = instantiatedButton.GetComponent<Button>();
-                buttonComponent.onClick.AddListener(OnButtonClicked);
-            }
-        }
+        // Set up the button's click event
+        Button buttonComponent = instantiatedButton.GetComponent<Button>();
+        buttonComponent.onClick.AddListener(OnButtonClicked);
     }
 
     void OnButtonClicked()
