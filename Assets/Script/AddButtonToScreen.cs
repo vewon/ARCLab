@@ -5,6 +5,10 @@ public class AddButtonToScreen : MonoBehaviour
 {
     public GameObject buttonPrefab;
     public GameObject canvas; // The Canvas to which the button will be added
+    public GameObject menuPrefab;
+
+    private GameObject currentMenu;
+    private bool isMenuVisible;
 
     void Start()
     {
@@ -24,6 +28,22 @@ public class AddButtonToScreen : MonoBehaviour
 
     void OnButtonClicked()
     {
-        Debug.Log("Button clicked!");
+        if (isMenuVisible) // checks if menu is visible; if yes, then it destroys the menu
+        {
+            Destroy(currentMenu);
+            isMenuVisible = false;
+            currentMenu.SetActive(false);
+        }
+        else
+        {
+            currentMenu = Instantiate(menuPrefab, canvas.transform);
+            RectTransform menuTransform = currentMenu.GetComponent<RectTransform>();
+            menuTransform.anchorMin = new Vector2(0.5f, 0.5f);
+            menuTransform.anchorMax = new Vector2(0.5f, 0.5f);
+            menuTransform.anchoredPosition = new Vector2(0, 0);
+            isMenuVisible = true;
+            currentMenu.SetActive(true);
+            currentMenu.tag = "Menu";
+        }
     }
 }
