@@ -55,6 +55,8 @@ public class PlaceTrackedImageOnTouch : MonoBehaviour
         }
 
         //enables touch fucntionalities
+        Debug.Log("Test Button Work");
+        EnhancedTouch.EnhancedTouchSupport.Enable();
         EnhancedTouch.TouchSimulation.Enable();
         EnhancedTouch.EnhancedTouchSupport.Enable();
         EnhancedTouch.Touch.onFingerDown += FingerDown;
