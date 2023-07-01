@@ -9,6 +9,7 @@ using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
 public class PlaceTrackedImageOnTouch : MonoBehaviour
 {
     //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
     [Serializable]
     public struct PrefabDetails
     {
@@ -18,6 +19,7 @@ public class PlaceTrackedImageOnTouch : MonoBehaviour
 
     [SerializeField]
     private PrefabDetails[] ArPrefabsWithDetails;
+
     //BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 
     // referencing ARTrackedImageManager and ARRaycastManager Components
@@ -68,7 +70,7 @@ public class PlaceTrackedImageOnTouch : MonoBehaviour
         {
             _trackedImagesManager.trackedImagesChanged -= OnTrackedImagesChanged;
         }
-
+        EnhancedTouch.EnhancedTouchSupport.Disable();
         EnhancedTouch.TouchSimulation.Disable();
         EnhancedTouch.EnhancedTouchSupport.Disable();
         EnhancedTouch.Touch.onFingerDown -= FingerDown;
@@ -115,6 +117,7 @@ public class PlaceTrackedImageOnTouch : MonoBehaviour
             }
         }
         //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
         foreach (ARRaycastHit hit in hits)
         {
             Pose pose = hit.pose;
@@ -133,6 +136,7 @@ public class PlaceTrackedImageOnTouch : MonoBehaviour
                 }
             }
         }
+
         //BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
     }
 }
