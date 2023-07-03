@@ -11,10 +11,9 @@ public class PlaceTrackedImageOnTouch : MonoBehaviour
     private ARTrackedImageManager _trackedImagesManager;
     private ARRaycastManager _raycastManager;
     public GameObject[] ArPrefabs;
-    private List<ARRaycastHit> hits = new List<ARRaycastHit>();
+    private Dictionary<string, GameObject> spawnedObjects = new Dictionary<string, GameObject>();
     private List<ARTrackedImage> trackedImages = new List<ARTrackedImage>();
-
-    // Define the threshold distance
+    private List<ARRaycastHit> hits = new List<ARRaycastHit>();
     public float thresholdDistance = 0.1f;
 
     void Awake()
@@ -80,9 +79,10 @@ public class PlaceTrackedImageOnTouch : MonoBehaviour
                     {
                         var imageName = trackedImage.referenceImage.name;
                         GameObject curPrefab = Array.Find(ArPrefabs, prefab => prefab.name == imageName);
-                        if (curPrefab != null)
+                        if (curPrefab != null && !spawnedObjects.ContainsKey(imageName))
                         {
-                            var newPrefab = Instantiate(curPrefab, pose.position, pose.rotation);
+                            var newPrefab = Instantiate(curPrefab, trackedImage.transform);
+                            spawnedObjects[imageName] = newPrefab;
                         }
                     }
                 }
