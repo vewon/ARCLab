@@ -4,24 +4,11 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
+using TMPro;
 
 [RequireComponent(typeof(ARTrackedImageManager), typeof(ARRaycastManager))]
 public class PlaceTrackedImageOnTouch : MonoBehaviour
 {
-    //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-
-    [Serializable]
-    public struct PrefabDetails
-    {
-        public GameObject Prefab;
-        public string Details;
-    }
-
-    [SerializeField]
-    private PrefabDetails[] ArPrefabsWithDetails;
-
-    //BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-
     // referencing ARTrackedImageManager and ARRaycastManager Components
     private ARTrackedImageManager _trackedImagesManager;
     private ARRaycastManager _raycastManager;
@@ -33,8 +20,19 @@ public class PlaceTrackedImageOnTouch : MonoBehaviour
     private List<ARRaycastHit> hits = new List<ARRaycastHit>();
     private List<ARTrackedImage> trackedImages = new List<ARTrackedImage>();
 
-    // Define the threshold distance
+    [SerializeField]
+    private GameObject detailPanel;
+
+    [SerializeField]
+    private TextMeshProUGUI detailText;
+
     public float thresholdDistance = 0.1f;
+
+    private Dictionary<string, string> imageDetails = new Dictionary<string, string>
+    {
+        {"CompInfo0", "null"},
+        {"CompInfo1", "2k"}
+    };
 
     void Awake()
     {
@@ -47,6 +45,7 @@ public class PlaceTrackedImageOnTouch : MonoBehaviour
         {
             Debug.LogError("ARTrackedImageManager component not found.");
         }
+        detailPanel.SetActive(false);
     }
 
     private void OnEnable()
@@ -79,15 +78,40 @@ public class PlaceTrackedImageOnTouch : MonoBehaviour
     private void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
     {
         //handle each tracked image added
-        foreach (var trackedImage in eventArgs.added)
+        foreach (ARTrackedImage trackedImage in eventArgs.added)
         {
             trackedImages.Add(trackedImage);
+            //UpdateImage(trackedImage);
+            UpdateInfo(trackedImage);
         }
 
         //handles removed tracked images
-        foreach (var trackedImage in eventArgs.removed)
+        foreach (ARTrackedImage trackedImage in eventArgs.removed)
         {
             trackedImages.Remove(trackedImage);
+            //UpdateImage(trackedImage);
+        }
+
+        foreach (ARTrackedImage trackedImage in eventArgs.updated)
+        {
+            UpdateInfo(trackedImage);
+        }
+    }
+
+    void UpdateInfo(ARTrackedImage trackedImage)
+    {
+        HoverInfo hoverInfo = trackedImage.GetComponent<HoverInfo>();
+        if (hoverInfo != null)
+        {
+            string newDetails;
+            if (imageDetails.TryGetValue(trackedImage.referenceImage.name, out newDetails))
+            {
+                hoverInfo.SetDetails(newDetails);
+            }
+            else
+            {
+                Debug.LogWarning($"Details not found for image {trackedImage.referenceImage.name}");
+            }
         }
     }
 
@@ -108,35 +132,33 @@ public class PlaceTrackedImageOnTouch : MonoBehaviour
                     {
                         var imageName = trackedImage.referenceImage.name;
                         GameObject curPrefab = Array.Find(ArPrefabs, prefab => prefab.name == imageName);
+
                         if (curPrefab != null)
                         {
                             var newPrefab = Instantiate(curPrefab, pose.position, pose.rotation);
+                            var hitInfo = newPrefab.GetComponent<HoverInfo>();
+
+                            if (hitInfo != null)
+                            {
+                                // Show the details panel and set the text to the object's details
+                                detailPanel.SetActive(true);
+                                detailText.text = hitInfo.GetDetails();
+                            }
+                            // If the object is not interactive
+                            else
+                            {
+                                // Hide the details panel
+                                detailPanel.SetActive(false);
+                            }
+                            //detailPanel.SetActive(true);
                         }
                     }
                 }
             }
         }
-        //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-
-        foreach (ARRaycastHit hit in hits)
+        else
         {
-            Pose pose = hit.pose;
-            foreach (var trackedImage in trackedImages)
-            {
-                if (Vector3.Distance(pose.position, trackedImage.transform.position) < thresholdDistance)
-                {
-                    var imageName = trackedImage.referenceImage.name;
-                    PrefabDetails curPrefabDetails = Array.Find(ArPrefabsWithDetails, prefabDetails => prefabDetails.Prefab.name == imageName);
-                    if (curPrefabDetails.Prefab != null)
-                    {
-                        var newPrefab = Instantiate(curPrefabDetails.Prefab, pose.position, pose.rotation);
-                        var hoverInfo = newPrefab.AddComponent<HoverInfo>();
-                        hoverInfo.SetDetails(curPrefabDetails.Details);
-                    }
-                }
-            }
+            detailPanel.SetActive(false);
         }
-
-        //BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
     }
 }
