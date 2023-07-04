@@ -120,6 +120,51 @@ public class PlaceTrackedImageOnTouch : MonoBehaviour
         //check if finger index is 0 (first finger)
         if (finger.index != 0) return;
 
+        if (_raycastManager.Raycast(finger.currentTouch.screenPosition, hits, TrackableType.Image))
+        {
+            ARRaycastHit closestHit = hits[0];
+            foreach (ARRaycastHit hit in hits)
+            {
+                if (hit.distance < closestHit.distance)
+                {
+                    closestHit = hit;
+                }
+            }
+            Pose pose = closestHit.pose;
+
+            ARTrackedImage closestTrackedImage = null;
+            float minDistance = thresholdDistance;
+            foreach (var trackedImage in trackedImages)
+            {
+                float distance = Vector3.Distance(pose.position, trackedImage.transform.position);
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    closestTrackedImage = trackedImage;
+                }
+            }
+
+            if (closestTrackedImage != null)
+            {
+                string details;
+                if (imageDetails.TryGetValue(closestTrackedImage.referenceImage.name, out details))
+                {
+                    detailPanel.SetActive(true);
+                    detailText.text = details;
+                }
+                else
+                {
+                    Debug.LogWarning($"Details for this image not found {closestTrackedImage.referenceImage.name}");
+                    detailPanel.SetActive(false);
+                }
+            }
+        }
+        else
+        {
+            detailPanel.SetActive(false);
+        }
+
+        /* OLD CODE
         //perform raycast from finger's current touch position onto tracked images
         if (_raycastManager.Raycast(finger.currentTouch.screenPosition, hits, TrackableType.Image))
         {
@@ -130,27 +175,16 @@ public class PlaceTrackedImageOnTouch : MonoBehaviour
                 {
                     if (Vector3.Distance(pose.position, trackedImage.transform.position) < thresholdDistance)
                     {
-                        var imageName = trackedImage.referenceImage.name;
-                        GameObject curPrefab = Array.Find(ArPrefabs, prefab => prefab.name == imageName);
-
-                        if (curPrefab != null)
+                        string details;
+                        if (imageDetails.TryGetValue(trackedImage.referenceImage.name, out details))
                         {
-                            var newPrefab = Instantiate(curPrefab, pose.position, pose.rotation);
-                            var hitInfo = newPrefab.GetComponent<HoverInfo>();
-
-                            if (hitInfo != null)
-                            {
-                                // Show the details panel and set the text to the object's details
-                                detailPanel.SetActive(true);
-                                detailText.text = hitInfo.GetDetails();
-                            }
-                            // If the object is not interactive
-                            else
-                            {
-                                // Hide the details panel
-                                detailPanel.SetActive(false);
-                            }
-                            //detailPanel.SetActive(true);
+                            detailPanel.SetActive(true);
+                            detailText.text = details;
+                        }
+                        else
+                        {
+                            Debug.LogWarning($"Details not found for image {trackedImage.referenceImage.name}");
+                            detailPanel.SetActive(false);
                         }
                     }
                 }
@@ -160,5 +194,6 @@ public class PlaceTrackedImageOnTouch : MonoBehaviour
         {
             detailPanel.SetActive(false);
         }
+        */
     }
 }
