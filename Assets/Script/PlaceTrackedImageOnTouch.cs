@@ -166,37 +166,5 @@ public class PlaceTrackedImageOnTouch : MonoBehaviour
         {
             detailPanel.SetActive(false);
         }
-
-        /* OLD CODE
-        //perform raycast from finger's current touch position onto tracked images
-        if (_raycastManager.Raycast(finger.currentTouch.screenPosition, hits, TrackableType.Image))
-        {
-            foreach (ARRaycastHit hit in hits)
-            {
-                Pose pose = hit.pose;
-                foreach (var trackedImage in trackedImages)
-                {
-                    if (Vector3.Distance(pose.position, trackedImage.transform.position) < thresholdDistance)
-                    {
-                        string details;
-                        if (imageDetails.TryGetValue(trackedImage.referenceImage.name, out details))
-                        {
-                            detailPanel.SetActive(true);
-                            detailText.text = details;
-                        }
-                        else
-                        {
-                            Debug.LogWarning($"Details not found for image {trackedImage.referenceImage.name}");
-                            detailPanel.SetActive(false);
-                        }
-                    }
-                }
-            }
-        }
-        else
-        {
-            detailPanel.SetActive(false);
-        }
-        */
     }
 }
