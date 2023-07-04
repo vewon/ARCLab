@@ -31,7 +31,10 @@ public class PlaceTrackedImageOnTouch : MonoBehaviour
     private Dictionary<string, string> imageDetails = new Dictionary<string, string>
     {
         {"CompInfo0", "null"},
-        {"CompInfo1", "2k"}
+        {"CompInfo1", "2k"},
+        {"CompInfo2", "test1"},
+        {"CompInfo3", "joystick test"},
+        {"CompInfo4", "servotest"}
     };
 
     void Awake()
