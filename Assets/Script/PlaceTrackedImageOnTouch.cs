@@ -1,6 +1,9 @@
 using System;
+using System.IO;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
@@ -28,14 +31,15 @@ public class PlaceTrackedImageOnTouch : MonoBehaviour
 
     public float thresholdDistance = 0.1f;
 
-    private Dictionary<string, string> imageDetails = new Dictionary<string, string>
+    private Dictionary<string, string> imageDetails = new Dictionary<string, string>();
+
+    // container class to hold keys and values for JSON serialization
+    [Serializable]
+    public class ImageDetailsContainer
     {
-        {"CompInfo0", "null"},
-        {"CompInfo1", "2k"},
-        {"CompInfo2", "test1"},
-        {"CompInfo3", "joystick test"},
-        {"CompInfo4", "servotest"}
-    };
+        public List<string> keys = new List<string>();
+        public List<string> values = new List<string>();
+    }
 
     void Awake()
     {
@@ -48,7 +52,34 @@ public class PlaceTrackedImageOnTouch : MonoBehaviour
         {
             Debug.LogError("ARTrackedImageManager component not found.");
         }
+        StartCoroutine(LoadImageDetailsFromJSON());
         detailPanel.SetActive(false);
+    }
+
+    public IEnumerator LoadImageDetailsFromJSON()
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "imageDetails.json");
+
+        using (UnityWebRequest www = UnityWebRequest.Get(path))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.result == UnityWebRequest.Result.ConnectionError)
+            {
+                Debug.LogError($"Unable to load image details: {www.error}");
+            }
+            else
+            {
+                ImageDetailsContainer imageDetailsContainer = JsonUtility.FromJson<ImageDetailsContainer>(www.downloadHandler.text);
+
+                imageDetails.Clear();
+
+                for (int i = 0; i < imageDetailsContainer.keys.Count; i++)
+                {
+                    imageDetails.Add(imageDetailsContainer.keys[i], imageDetailsContainer.values[i]);
+                }
+            }
+        }
     }
 
     private void OnEnable()
@@ -59,7 +90,6 @@ public class PlaceTrackedImageOnTouch : MonoBehaviour
         }
 
         //enables touch fucntionalities
-        Debug.Log("Test Button Work");
         EnhancedTouch.EnhancedTouchSupport.Enable();
         EnhancedTouch.TouchSimulation.Enable();
         EnhancedTouch.EnhancedTouchSupport.Enable();

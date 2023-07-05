@@ -1,0 +1,16 @@
+{
+    "keys": [
+        "CompInfo0",
+        "CompInfo1",
+        "CompInfo2",
+        "CompInfo3",
+        "CompInfo4"
+    ],
+    "values": [
+        "null",
+        "2k",
+        "test1",
+        "joystick test",
+        "servotest"
+    ]
+}

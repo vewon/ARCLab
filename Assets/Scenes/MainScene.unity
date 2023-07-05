@@ -1611,6 +1611,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CompInfo1
       objectReference: {fileID: 0}
+    - target: {fileID: 5667839946362754890, guid: 0ce2f9f66d5c647bc9b2c38b74d83dc5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
