@@ -8,7 +8,7 @@ public class TargetIndicator : MonoBehaviour
 {
     private ARRaycastManager raycastManager;
     private GameObject indicator;
-    private List<ARRaycastHit> hits = new List<ARRaycastHit> ();
+    private List<ARRaycastHit> hits = new List<ARRaycastHit>();
     // Start is called before the first frame update
     void Start()
     {
