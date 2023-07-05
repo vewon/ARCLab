@@ -10,7 +10,7 @@ using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
 using TMPro;
 
 [RequireComponent(typeof(ARTrackedImageManager), typeof(ARRaycastManager))]
-public class PlaceTrackedImageOnTouch : MonoBehaviour
+public class ShowDetailsOnTouch : MonoBehaviour
 {
     // referencing ARTrackedImageManager and ARRaycastManager Components
     private ARTrackedImageManager _trackedImagesManager;

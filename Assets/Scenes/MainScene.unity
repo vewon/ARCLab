@@ -428,12 +428,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 388525029}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70024a24806a14ddb860cb009035e4f8, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d5b62a710a1546a1a0cd22895f031c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ArPrefabs:
   - {fileID: 4980383839299484048, guid: 212409633f9fe4e9abdd86de9e5b6322, type: 3}
-  - {fileID: 1755087847773345934, guid: a03ce10c9d4c548ff8687f668688060b, type: 3}
+  - {fileID: 6976920443562880576, guid: a09c20c813c0442268269572352eb915, type: 3}
+  - {fileID: 5667839946362754890, guid: 0ce2f9f66d5c647bc9b2c38b74d83dc5, type: 3}
   detailPanel: {fileID: 6264068231718114048}
   detailText: {fileID: 2835813687074134352}
   thresholdDistance: 0.1

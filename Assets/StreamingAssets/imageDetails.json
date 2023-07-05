@@ -1,15 +1,15 @@
 {
     "keys": [
-        "CompInfo0",
-        "CompInfo1",
-        "CompInfo2",
+        "Arduino_UNO",
+        "JoystickModule",
+        "ServoMotor",
         "CompInfo3",
         "CompInfo4"
     ],
     "values": [
-        "null",
-        "2k",
-        "test1",
+        "Arduino UNO; [deets]",
+        "Joystick; [deets]",
+        "Servo Motor; [deets]",
         "joystick test",
         "servotest"
     ]
