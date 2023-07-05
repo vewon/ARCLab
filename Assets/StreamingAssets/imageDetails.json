@@ -1,0 +1,16 @@
+{
+    "keys": [
+        "Arduino_UNO",
+        "JoystickModule",
+        "ServoMotor",
+        "CompInfo3",
+        "CompInfo4"
+    ],
+    "values": [
+        "Arduino UNO; [deets]",
+        "Joystick; [deets]",
+        "Servo Motor; [deets]",
+        "joystick test",
+        "servotest"
+    ]
+}
