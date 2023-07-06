@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +11,8 @@ public class AddButtonToScreen : MonoBehaviour
 
     private GameObject currentMenu;
     private bool isMenuVisible;
+
+    ButtonOptions buttonOptions;
 
     void Start()
     {
@@ -44,6 +48,15 @@ public class AddButtonToScreen : MonoBehaviour
             isMenuVisible = true;
             currentMenu.SetActive(true);
             currentMenu.tag = "Menu";
+            buttonOptions.ButtonFunctions();
         }
+    }
+}
+
+public class ButtonOptions
+{
+    public void ButtonFunctions()
+    {
+
     }
 }
