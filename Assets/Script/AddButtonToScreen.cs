@@ -34,7 +34,7 @@ public class AddButtonToScreen : MonoBehaviour
         {
             Destroy(currentMenu);
             isMenuVisible = false;
-            currentMenu.SetActive(false);
+            // currentMenu.SetActive(false);
         }
         else
         {
@@ -44,7 +44,7 @@ public class AddButtonToScreen : MonoBehaviour
             menuTransform.anchorMax = new Vector2(0.5f, 0.5f);
             menuTransform.anchoredPosition = new Vector2(0, 0);
             isMenuVisible = true;
-            currentMenu.SetActive(true);
+            // currentMenu.SetActive(true);
             currentMenu.tag = "Menu";
         }
     }

@@ -2635,7 +2635,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonPrefab: {fileID: 633107009}
   canvas: {fileID: 1178095717}
-  menuPrefab: {fileID: 0}
+  menuPrefab: {fileID: 255471413}
 --- !u!4 &1239939764
 Transform:
   m_ObjectHideFlags: 0
