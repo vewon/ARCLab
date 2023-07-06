@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: OptionsAnimation
+  m_Name: Show Settings
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -52,7 +52,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: ComponentMenu
+    path: Components
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -71,16 +71,16 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.16666667
-        value: 50
-        inSlope: 840
-        outSlope: 840
+        value: 70
+        inSlope: 359.99997
+        outSlope: 359.99997
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.33333334
-        value: 120
+        value: 100
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -100,7 +100,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: WireButton
+    path: Wire
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -119,9 +119,9 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.16666667
-        value: 0
-        inSlope: 810
-        outSlope: 810
+        value: 30
+        inSlope: 480
+        outSlope: 480
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -148,7 +148,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: Selection
+    path: Select
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -161,7 +161,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 1696000787
+      path: 2702571053
       attribute: 1460864421
       script: {fileID: 0}
       typeID: 224
@@ -170,7 +170,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 4077993919
+      path: 273257995
       attribute: 1460864421
       script: {fileID: 0}
       typeID: 224
@@ -179,7 +179,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 341085812
+      path: 1281290230
       attribute: 1460864421
       script: {fileID: 0}
       typeID: 224
@@ -244,7 +244,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: ComponentMenu
+    path: Components
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -263,16 +263,16 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.16666667
-        value: 50
-        inSlope: 840
-        outSlope: 840
+        value: 70
+        inSlope: 359.99997
+        outSlope: 359.99997
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.33333334
-        value: 120
+        value: 100
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -292,7 +292,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: WireButton
+    path: Wire
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -311,9 +311,9 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.16666667
-        value: 0
-        inSlope: 810
-        outSlope: 810
+        value: 30
+        inSlope: 480
+        outSlope: 480
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -340,7 +340,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: Selection
+    path: Select
     classID: 224
     script: {fileID: 0}
     flags: 0
