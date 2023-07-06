@@ -12,8 +12,6 @@ public class AddButtonToScreen : MonoBehaviour
     private GameObject currentMenu;
     private bool isMenuVisible;
 
-    ButtonOptions buttonOptions;
-
     void Start()
     {
         // Instantiate the button as a child of the Canvas
@@ -48,15 +46,6 @@ public class AddButtonToScreen : MonoBehaviour
             isMenuVisible = true;
             currentMenu.SetActive(true);
             currentMenu.tag = "Menu";
-            buttonOptions.ButtonFunctions();
         }
-    }
-}
-
-public class ButtonOptions
-{
-    public void ButtonFunctions()
-    {
-
     }
 }
