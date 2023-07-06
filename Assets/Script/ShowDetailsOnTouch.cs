@@ -92,7 +92,6 @@ public class ShowDetailsOnTouch : MonoBehaviour
         //enables touch fucntionalities
         EnhancedTouch.EnhancedTouchSupport.Enable();
         EnhancedTouch.TouchSimulation.Enable();
-        EnhancedTouch.EnhancedTouchSupport.Enable();
         EnhancedTouch.Touch.onFingerDown += FingerDown;
     }
 
@@ -104,7 +103,6 @@ public class ShowDetailsOnTouch : MonoBehaviour
         }
         EnhancedTouch.EnhancedTouchSupport.Disable();
         EnhancedTouch.TouchSimulation.Disable();
-        EnhancedTouch.EnhancedTouchSupport.Disable();
         EnhancedTouch.Touch.onFingerDown -= FingerDown;
     }
 
