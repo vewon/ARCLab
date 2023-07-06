@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Menu
+  - options
   layers:
   - Default
   - TransparentFX
