@@ -18,10 +18,10 @@ public class AddButtonToScreen : MonoBehaviour
         GameObject instantiatedButton = Instantiate(buttonPrefab, canvas.transform);
 
         // Move the button to the top of the screen
-        RectTransform rectTransform = instantiatedButton.GetComponent<RectTransform>();
-        rectTransform.anchorMin = new Vector2(0, 1);
-        rectTransform.anchorMax = new Vector2(0, 1);
-        rectTransform.anchoredPosition = new Vector2(50, -50); // Move button down by 150 pixels
+        // RectTransform rectTransform = instantiatedButton.GetComponent<RectTransform>();
+        // rectTransform.anchorMin = new Vector2(0, 1);
+        // rectTransform.anchorMax = new Vector2(0, 1);
+        // rectTransform.anchoredPosition = new Vector2(50, -50); // Move button down by 150 pixels
 
         // Set up the button's click event
         Button buttonComponent = instantiatedButton.GetComponent<Button>();
