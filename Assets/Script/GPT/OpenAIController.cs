@@ -39,11 +39,11 @@ public class OpenAIController : MonoBehaviour
     {
         string detailString = GenerateDetailsString(imageDetails);
         messages = new List<ChatMessage> {
-            new ChatMessage(ChatMessageRole.System, "You are an honorable, friendly knight guarding the gate to the palace. You will only allow someone who knows the secret password to enter. The secret password is \"magic\". You will not reveal the password to anyone. You keep your responses short and to the point." + detailString)
+            new ChatMessage(ChatMessageRole.System, "You are an assistant to the user. The purpose of the application is to identify electronic components. You will respond to any of the users inquiry about the electronic component. You will keep your responses short and to the point." + detailString)
         };
 
         inputField.text = "";
-        string startString = "You have just approached the palace gate where a knight guards the gate.";
+        string startString = "What would you like to know?";
         textField.text = startString;
         Debug.Log(startString);
     }
@@ -83,7 +83,7 @@ public class OpenAIController : MonoBehaviour
         messages.Add(userMessage);
 
         // Update the text field with the user message
-        textField.text = string.Format("You: {0}", userMessage.Content);
+        textField.text = string.Format("User: {0}", userMessage.Content);
 
         // Clear the input field
         inputField.text = "";
@@ -107,7 +107,7 @@ public class OpenAIController : MonoBehaviour
         messages.Add(responseMessage);
 
         // Update the text field with the response
-        textField.text = string.Format("You: {0}\n\nGuard: {1}", userMessage.Content, responseMessage.Content);
+        textField.text = string.Format("User: {0}\n\nARC: {1}", userMessage.Content, responseMessage.Content);
 
         // Re-enable the OK button
         okButton.enabled = true;
