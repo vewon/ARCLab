@@ -20,6 +20,8 @@ public class ShowDetailsOnTouch : MonoBehaviour
     //array of gameobjects to be instantiated when a tracked image is touched
     public GameObject[] ArPrefabs;
 
+    public OpenAIController openAIController;
+
     //list to store ARRaycast hits and tracked images
     private List<ARRaycastHit> hits = new List<ARRaycastHit>();
     private List<ARTrackedImage> trackedImages = new List<ARTrackedImage>();
@@ -31,6 +33,9 @@ public class ShowDetailsOnTouch : MonoBehaviour
     private TextMeshProUGUI detailText;
 
     [SerializeField] private Button closeButton;
+
+    // save which one is the current image being shown
+    public string CurrentImageName { get; private set; } = null;
 
     public float thresholdDistance = 0.1f;
 
@@ -200,6 +205,15 @@ public class ShowDetailsOnTouch : MonoBehaviour
                 {
                     detailPanel.SetActive(true);
                     detailText.text = details;
+
+                    // Set the currently selected image name
+                    CurrentImageName = closestTrackedImage.referenceImage.name;
+
+                    // Start the conversation with the selected image's details
+                    openAIController.StartConversation();
+
+                    // Log the current image name to the console
+                    Debug.Log("Current image: " + CurrentImageName);
                 }
                 else
                 {

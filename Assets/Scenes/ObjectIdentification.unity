@@ -1585,6 +1585,7 @@ MonoBehaviour:
   - {fileID: 4980383839299484048, guid: 212409633f9fe4e9abdd86de9e5b6322, type: 3}
   - {fileID: 6976920443562880576, guid: a09c20c813c0442268269572352eb915, type: 3}
   - {fileID: 5667839946362754890, guid: 0ce2f9f66d5c647bc9b2c38b74d83dc5, type: 3}
+  openAIController: {fileID: 22992202}
   detailPanel: {fileID: 1839447116}
   detailText: {fileID: 2146175098}
   closeButton: {fileID: 573201185}

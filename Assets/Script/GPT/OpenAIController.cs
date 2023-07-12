@@ -26,6 +26,9 @@ public class OpenAIController : MonoBehaviour
     {
         imageDetails = showDetailsOnTouch.ImageDetails;
 
+        // Add a debug log to check if imageDetails are correctly fetched
+        Debug.Log("Number of image details fetched: " + imageDetails.Count);
+
         // This line gets your API key (and could be slightly different on Mac/Linux)
         //api = new OpenAIAPI(Environment.GetEnvironmentVariable("OPENAI_API_KEY", EnvironmentVariableTarget.User));
         api = new OpenAIAPI(""
@@ -35,17 +38,37 @@ public class OpenAIController : MonoBehaviour
         okButton.onClick.AddListener(() => GetResponse());
     }
 
-    private void StartConversation()
+    public void StartConversation()
     {
-        string detailString = GenerateDetailsString(imageDetails);
-        messages = new List<ChatMessage> {
-            new ChatMessage(ChatMessageRole.System, "You are an assistant to the user. The purpose of the application is to identify electronic components. You will respond to any of the users inquiry about the electronic component. You will keep your responses short and to the point." + detailString)
-        };
+        string currentImageName = showDetailsOnTouch.CurrentImageName;
 
-        inputField.text = "";
-        string startString = "What would you like to know?";
-        textField.text = startString;
-        Debug.Log(startString);
+        string detailString = "";
+
+        if (imageDetails.TryGetValue(currentImageName, out detailString))
+        {
+            messages = new List<ChatMessage> {
+                new ChatMessage(ChatMessageRole.System, "You are an assistant to the user. The purpose of the application is to identify electronic components. You will respond to any of the users inquiry about the electronic component. You will keep your responses short and to the point." + detailString)
+            };
+
+            inputField.text = "";
+            string startString = "What would you like to know about the " + detailString + "?";
+            textField.text = startString;
+            Debug.Log(startString);
+        }
+        else
+        {
+            Debug.LogError("No details found for image: " + currentImageName);
+        }
+
+        // string detailString = GenerateDetailsString(imageDetails);
+        // messages = new List<ChatMessage> {
+        //     new ChatMessage(ChatMessageRole.System, "You are an assistant to the user. The purpose of the application is to identify electronic components. You will respond to any of the users inquiry about the electronic component. You will keep your responses short and to the point." + detailString)
+        // };
+
+        // inputField.text = "";
+        // string startString = "What would you like to know? " + detailString;
+        // textField.text = startString;
+        // Debug.Log(startString);
     }
 
     string GenerateDetailsString(Dictionary<string, string> imageDetails)
@@ -55,6 +78,10 @@ public class OpenAIController : MonoBehaviour
         {
             details += pair.Value + "\n";
         }
+
+        // Add a debug log to check the generated detailString
+        Debug.Log("Generated detail string: " + details);
+
         return details;
     }
 
