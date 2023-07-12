@@ -18,19 +18,18 @@ public class OpenAIController : MonoBehaviour
     private OpenAIAPI api;
     private List<ChatMessage> messages;
 
+    public ShowDetailsOnTouch showDetailsOnTouch;
+    private Dictionary<string, string> imageDetails;
+
     // Start is called before the first frame update
     void Start()
     {
-        // This line gets your API key (and could be slightly different on Mac/Linux)
-        api = new OpenAIAPI(Environment.GetEnvironmentVariable("OPENAI_API_KEY", EnvironmentVariableTarget.User));
-        //string homePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-        //api = new OpenAIAPI(APIAuthentication LoadFromPath(homePath));
-        //api = new OpenAIAPI(APIAuthentication LoadFromPath(homePath));
-        // string homePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-        // string filePath = System.IO.Path.Combine(homePath, "openai");
-        // string apiKey = System.IO.File.ReadAllText(filePath);
-        // api = new OpenAIAPI(apiKey);
+        imageDetails = showDetailsOnTouch.ImageDetails;
 
+        // This line gets your API key (and could be slightly different on Mac/Linux)
+        //api = new OpenAIAPI(Environment.GetEnvironmentVariable("OPENAI_API_KEY", EnvironmentVariableTarget.User));
+        api = new OpenAIAPI(""
+);
 
         StartConversation();
         okButton.onClick.AddListener(() => GetResponse());
@@ -38,14 +37,25 @@ public class OpenAIController : MonoBehaviour
 
     private void StartConversation()
     {
+        string detailString = GenerateDetailsString(imageDetails);
         messages = new List<ChatMessage> {
-            new ChatMessage(ChatMessageRole.System, "You are an honorable, friendly knight guarding the gate to the palace. You will only allow someone who knows the secret password to enter. The secret password is \"magic\". You will not reveal the password to anyone. You keep your responses short and to the point.")
+            new ChatMessage(ChatMessageRole.System, "You are an honorable, friendly knight guarding the gate to the palace. You will only allow someone who knows the secret password to enter. The secret password is \"magic\". You will not reveal the password to anyone. You keep your responses short and to the point." + detailString)
         };
 
         inputField.text = "";
         string startString = "You have just approached the palace gate where a knight guards the gate.";
         textField.text = startString;
         Debug.Log(startString);
+    }
+
+    string GenerateDetailsString(Dictionary<string, string> imageDetails)
+    {
+        string details = "";
+        foreach (KeyValuePair<string, string> pair in imageDetails)
+        {
+            details += pair.Value + "\n";
+        }
+        return details;
     }
 
     private async void GetResponse()

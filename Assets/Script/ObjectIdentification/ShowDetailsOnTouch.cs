@@ -41,6 +41,12 @@ public class ShowDetailsOnTouch : MonoBehaviour
         public List<string> values = new List<string>();
     }
 
+    // expose imageDetails to be accessed in OpenAIController
+    public Dictionary<string, string> ImageDetails
+    {
+        get { return imageDetails; }
+    }
+
     void Awake()
     {
         //get references to ARTrackedImageManager and ARRaycastManager components

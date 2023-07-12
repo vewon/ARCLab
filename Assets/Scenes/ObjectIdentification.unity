@@ -155,6 +155,7 @@ MonoBehaviour:
   textField: {fileID: 38111834}
   inputField: {fileID: 507496998}
   okButton: {fileID: 901648067}
+  showDetailsOnTouch: {fileID: 1797082753}
 --- !u!4 &22992203
 Transform:
   m_ObjectHideFlags: 0
