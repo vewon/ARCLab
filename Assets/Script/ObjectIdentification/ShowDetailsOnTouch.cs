@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
@@ -28,6 +29,8 @@ public class ShowDetailsOnTouch : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI detailText;
+
+    [SerializeField] private Button closeButton;
 
     public float thresholdDistance = 0.1f;
 
@@ -59,6 +62,13 @@ public class ShowDetailsOnTouch : MonoBehaviour
             Debug.LogError("ARTrackedImageManager component not found.");
         }
         StartCoroutine(LoadImageDetailsFromJSON());
+        //detailPanel.SetActive(false);
+
+        closeButton.onClick.AddListener(CloseDetailPanel);
+    }
+
+    void CloseDetailPanel()
+    {
         detailPanel.SetActive(false);
     }
 
@@ -110,6 +120,8 @@ public class ShowDetailsOnTouch : MonoBehaviour
         EnhancedTouch.EnhancedTouchSupport.Disable();
         EnhancedTouch.TouchSimulation.Disable();
         EnhancedTouch.Touch.onFingerDown -= FingerDown;
+
+        closeButton.onClick.RemoveListener(CloseDetailPanel);
     }
 
     private void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
@@ -196,9 +208,9 @@ public class ShowDetailsOnTouch : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            detailPanel.SetActive(false);
-        }
+        // else
+        // {
+        //     detailPanel.SetActive(false);
+        // }
     }
 }

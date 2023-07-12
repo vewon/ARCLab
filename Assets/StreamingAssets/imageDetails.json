@@ -7,9 +7,9 @@
         "CompInfo4"
     ],
     "values": [
-        "Arduino UNO \nInsert Details Here AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "Joystick; \nInsert Details Here AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "Servo Motor; \nInsert Details Here AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "Arduino UNO",
+        "Joystick",
+        "Servo Motor",
         "joystick test",
         "servotest"
     ]
